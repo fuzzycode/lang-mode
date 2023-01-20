@@ -19,6 +19,9 @@
 ;;
 ;;; Code:
 
+(eval-when-compile
+  (require 'cl-lib))
+
 (defconst lang-mode-syntax-table
   (let ((table (make-syntax-table)))
     ; Strings are inside ""
@@ -38,7 +41,9 @@
 
 (defun lang-mode-indent-line ()
   "Indentation handler for lang mode."
-  (save-excursion (indent-line-to 0)))
+  (save-excursion
+    (beginning-of-line)
+    (indent-line-to 0)))
 
 ;;;###autoload
 (define-derived-mode lang-mode fundamental-mode "Lang"
